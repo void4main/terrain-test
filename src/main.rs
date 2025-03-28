@@ -51,16 +51,16 @@ fn startup(
         println!("Data positions: {}", positions.len());
 
         let terrain_height = largest_f32(&data_vec).clone();
-
+        let scale = 100.0;
         for pos in positions.iter_mut().enumerate() {
             if let Some(data) = data_vec.pop() {
-                    pos.1[1] = data / 100.0;
+                    pos.1[1] = data / scale;
             }
         }
 
         let colors: Vec<[f32; 4]> = positions
             .iter()
-            .map(|[_, g, _]| get_height_color(*g * 100.0, ColorSpectrum::ImhofModified))
+            .map(|[_, g, _]| get_height_color(*g * scale, ColorSpectrum::ImhofModified))
             .collect();
         terrain.insert_attribute(Mesh::ATTRIBUTE_COLOR, colors);
         terrain.compute_normals();
