@@ -1,7 +1,7 @@
 # Visualize SRTM data with Bevy
 Simple (not yet accurate) mapping of SRTM data to a Plane3d mesh in bevy.
 
-![Japan with Fuji](./Screenshot-V0.1.0 "Japan with Fuji")
+![Japan tile with Fuji](Screenshot-V0.1.0.png "Japan tile with Fuji")
 
 ### SRTM data source
 Jarvis A., H.I. Reuter, A.  Nelson, E. Guevara, 2008, Hole-filled  seamless SRTM
