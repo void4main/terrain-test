@@ -1,3 +1,4 @@
+use bevy::color::Color::Srgba;
 use bevy::pbr::wireframe::{WireframeConfig, WireframePlugin};
 use bevy::prelude::*;
 use bevy::render::mesh::VertexAttributeValues;
@@ -54,7 +55,7 @@ fn startup(
         let scale = 100.0;
         for pos in positions.iter_mut().enumerate() {
             if let Some(data) = data_vec.pop() {
-                    pos.1[1] = data / scale;
+                pos.1[1] = data / scale;
             }
         }
 
@@ -73,6 +74,20 @@ fn startup(
         })),
         Terrain,
     ));
+
+    commands.spawn((
+        Mesh3d(meshes.add(Sphere::new(10.0))),     //Cuboid::new(10.0, 10.0, 10.0))),
+        MeshMaterial3d(materials.add(StandardMaterial {
+            base_color: Color::srgb(0.6,0.1,0.2),
+            metallic: 1.0,
+            reflectance: 0.8,
+            clearcoat_perceptual_roughness: 0.0,
+            clearcoat: 0.1,
+            ..Default::default()
+        })),
+        Transform::from_xyz(0.0, 0.0, 20.),
+    ));
+
 }
 
 #[derive(Component)]
@@ -153,7 +168,7 @@ fn get_height_color(height_m: f32, colors: ColorSpectrum) -> [f32; 4] {
                 }
                 _ => Color::srgb(1.0, 1.0, 1.0).to_linear().to_f32_array(),
             }
-        },
+        }
         ColorSpectrum::ImhofModified => {
             // Imhof colors with modifications
             // Unit of measure is meter
